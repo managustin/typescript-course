@@ -1,0 +1,23 @@
+{
+  "name": "typescript-course",
+  "version": "1.0.0",
+  "description": "I'll use this repository for tracking my progress in a TypeScript course made by Tech With Tim.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/managustin/typescript-course.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/managustin/typescript-course/issues"
+  },
+  "homepage": "https://github.com/managustin/typescript-course#readme",
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}
