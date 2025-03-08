@@ -1,19 +1,19 @@
-let x = 2; //this implicitly sets the type of the variable to number
+var arr0: number[] = [1, 2, 3];
+console.log(arr0);
 
-let y: number = 2; //this explicitly sets the type.
+var arr1 = [["hello0", 1], ["hello1"], ["hello2"]];
 
-let z: number;
-z = Infinity;
-z = 67.2;
+// coordinate pair x,y
+// a tuple is a fixed length array that has defined values for each position in the array
+const coord: [number, string] = [1,'2'];
+coord[0] = 2;   // ok
+//coord[1] = 2;   // not ok
+console.log(coord[0]);
 
-let cadena: string;
-cadena = `The z variable is equal to ${z}`;
-console.log(cadena);
+const coords1: [number, number][] = [ // this is an array of tuples
+    [1,2],
+    [-1,3],
+    [3,4]
+]
 
-let result0 = null; //null define explicitly something as empty or non-existent. by default the type is 'any'
-let result1 = undefined; //is more used as a placeholder that means a variable has been declared but has not yet been assigned a value
-result0 = 2;
-result1= 'hello'
-
-let result2: number | undefined = undefined;   //result2 can have either of the two types separated with the union.
-result2 = 2;
+console.log(`En coords1[0][1] hay ${coords1[2][1]}`);
