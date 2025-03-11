@@ -1,24 +1,41 @@
-//rest parameter: it can take as many arguments as needed
-function sum(str: string, ...numbers: number[]){
-    for(let numero of numbers){
-        console.log(numero);
-    }
-    numbers.forEach(numero => console.log(numero))
+interface Person { //Specify the different properties that an object of type Person would have.
+    name: string;
+    age: number;
+    height?: number; //optional prop
+    //hello: () => void;
 }
-//sum("hello", 1, 2, 3);
 
-//Overloaded function: a function that has different call signatures and can accept different types.
-//function getItemLength (value: string | string[], value2: string | string[]) {}
-
-//defining all the valid ways to call this function 
-function getItemLength(name: string): number;   
-function getItemLength(names: string[]): number;
-function getItemLength(nameOrNames: unknown): number {  //here is the definition of the general function, that handles all the types of inputs
-    if(typeof nameOrNames === "string"){
-        return nameOrNames.length
-    } else if(Array.isArray(nameOrNames)){
-        return nameOrNames.length
-    }
-    return 0
+const person: Person = {
+    name: "Agustín",
+    age: 23
+    /*hello: function(){
+        console.log(this.name + " says hi.");
+    }*/
 }
-console.log(getItemLength(["nombre1","nombre2","nombre3"]))
+//person.hello();
+
+interface Employee extends Person { //This interface inherits all of the properties from Person and add some more.
+    employeeId: number;
+}
+
+const worker: Employee = {
+    name: "Agustín",
+    age: 23,
+    height: 192,
+    employeeId: 10
+}
+
+interface Manager extends Employee{
+    employees: Person[]
+}
+/*
+const manager: Manager = {
+    
+}*/
+
+function getPerson(p: Person): Person {
+    return{
+        name: "Agustín",
+        age: 23
+    }
+}
