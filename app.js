@@ -1,15 +1,18 @@
 "use strict";
-function add(x, y) {
-    if (x === 0) {
-        return "invalid";
+//rest parameter: it can take as many arguments as needed
+function sum(str, ...numbers) {
+    for (let numero of numbers) {
+        console.log(numero);
     }
-    return x + y;
+    numbers.forEach(numero => console.log(numero));
 }
-console.log(add(0, 5));
-function makeName(firstName, lastName, middleName) {
-    if (middleName)
-        return firstName + " " + " " + middleName + " " + lastName;
-    return firstName + " " + lastName;
+function getItemLength(nameOrNames) {
+    if (typeof nameOrNames === "string") {
+        return nameOrNames.length;
+    }
+    else if (Array.isArray(nameOrNames)) {
+        return nameOrNames.length;
+    }
+    return 0;
 }
-const fullName = makeName("Agustín", "Mango");
-console.log(fullName);
+console.log(getItemLength(["nombre1", "nombre2", "nombre3"]));

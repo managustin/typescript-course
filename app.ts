@@ -1,49 +1,24 @@
-function add(x: number, y: number): number | string { //
-    if (x===0){
-        return "invalid"
+//rest parameter: it can take as many arguments as needed
+function sum(str: string, ...numbers: number[]){
+    for(let numero of numbers){
+        console.log(numero);
     }
-    return x + y
+    numbers.forEach(numero => console.log(numero))
 }
-console.log(add(0,5));
+//sum("hello", 1, 2, 3);
 
-function makeName(firstName: string, lastName: string, middleName?: string) {   //here the interrogation mark indicates that middleName is optional
-    if (middleName) return firstName + " " + " " + middleName + " " + lastName
-    return firstName + " " + lastName 
-}
-const fullName = makeName("Agustín", "Mango");
-console.log(fullName);
+//Overloaded function: a function that has different call signatures and can accept different types.
+//function getItemLength (value: string | string[], value2: string | string[]) {}
 
-
-function callFunc(func: (f: string, l: string, m?: string) => string,   // in this function, the first prop is also a function and all the types 
-    param1: string,                                                     // need to be set.
-    param2: string
-    ) {
-        func(param1,param2)     // here, it calls the func and passes the two parameters
-}
-
-callFunc(makeName, "Agustín","Mango")   // now we call the function that calls a function
-
-
-function mul(x: number, y: number): number {
-    return x*y;
-}
-
-function div(x: number, y: number): number {
-    return x/y;
-}
-
-
-function applyFunc(
-    funcs: ((a: number, b: number) => number)[], //the first argument is an array of functions that take two arguments that are numbers and returns a number.
-    values: [number, number][]  //the second argument is an array of a tuple of numbers
-): number[] {   // the applyFunc returns an array of numbers
-    const results = [] as number[];
-    for(let i=0; i < funcs.length; i++){
-        const args = values[i]
-        const result = funcs[i](args[0], args[1]);
-        results.push(result)
+//defining all the valid ways to call this function 
+function getItemLength(name: string): number;   
+function getItemLength(names: string[]): number;
+function getItemLength(nameOrNames: unknown): number {  //here is the definition of the general function, that handles all the types of inputs
+    if(typeof nameOrNames === "string"){
+        return nameOrNames.length
+    } else if(Array.isArray(nameOrNames)){
+        return nameOrNames.length
     }
-    return results;
+    return 0
 }
-
-applyFunc([mul, div], [[1,2], [4,5]])       //mul will have the tuple [1,2] as the different arguments.
+console.log(getItemLength(["nombre1","nombre2","nombre3"]))
