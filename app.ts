@@ -1,26 +1,45 @@
-// Static keyword is a non-access modifier used for methods and attributes
+// A generic allows us to have more flexible functions, methods, classes, etc. that can accept any data types to be set.
 
-//static methods and atributes are associated with the class rather than with each instance of the class.
+class DataStore<T> {    // This is a generic
+    private items: T[] = [];
 
-class Dog {
-    static instanceCount: number = 0; //now this variable is associated with the class
-    name: string; //this is an instance attribute. That is, each dog has a different name.
-
-    constructor(name: string) {
-        Dog.instanceCount++;
-        this.name = name
+    addItem(item: T): void {
+        this.items.push(item);
     }
 
-    static decreaseCount() {    // static method
-        this.instanceCount--;   // it would be the same as Dog.instanceCount--; Here 'this' refers to the class, not the instance.
+    getItem(index: number): T {
+        return this.items[index];
+    }
+
+    removeItem(index: number): void {
+        this.items.splice(index, 1);
+    }
+
+    getAllItems(): T[] {
+        return this.items;
     }
 }
 
-const dog1 = new Dog("Bodoquito");  // 1
-console.log(Dog.instanceCount)
+const data = new DataStore<string>() // Here it is specified the type that will be used for this instance of DataStore
+data.getItem(0)
 
-const dog2 = new Dog("Nina");       // 2
-console.log(Dog.instanceCount)
+interface User {
+    name: string;
+    id: number
+}
 
-Dog.decreaseCount();
-console.log(Dog.instanceCount);
+const dataUser = new DataStore<User>() // this demonstrates that it doesn't have to be a primitive type, but any type.
+
+
+//
+
+function getValue<K, V>(key: K, value1: V, value2: V): V {
+    if(key) {
+        return value1;
+    }
+    return value2;
+}
+
+const n1: number = 1;
+const n2: number = 2;
+getValue<string, number>("Hello", n1, n2); //   <string, number> Is optional here, but it's written just to be more strict.
