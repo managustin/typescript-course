@@ -1,27 +1,19 @@
 "use strict";
+// Static keyword is a non-access modifier used for methods and attributes
+//static methods and atributes are associated with the class rather than with each instance of the class.
 class Dog {
-    constructor(name, color) {
+    constructor(name) {
+        Dog.instanceCount++;
         this.name = name;
-        this.color = color;
     }
-    speak() {
-        console.log(`I am ${this.name} and I am ${this.color}`);
-    }
-    test() {
-        return 1;
+    static decreaseCount() {
+        this.instanceCount--;
     }
 }
-const dog = new Dog("Bodoquito", "Black"); //if we add the : Animal we now "view this dog through the lens of the animal interface". 
-//this is helpful when we want to hide the complexity of a specific class and only use the properties of the interface
-class Cat {
-    speak() {
-        console.log("Meow");
-    }
-}
-const cat = new Cat();
-const animals = [cat, dog]; //here the interface allows us to use both different objects and treat them as if they were of the same type 
-function makeSound(animal) {
-    animal.speak(); //it doesn't matter what the object is, as long as it implements the animal interface
-}
-makeSound(dog);
-makeSound(cat);
+Dog.instanceCount = 0; //now this variable is associated with the class
+const dog1 = new Dog("Bodoquito"); // 1
+console.log(Dog.instanceCount);
+const dog2 = new Dog("Nina"); // 2
+console.log(Dog.instanceCount);
+Dog.decreaseCount();
+console.log(Dog.instanceCount);

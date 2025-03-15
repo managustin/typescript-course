@@ -1,51 +1,26 @@
-interface Animal { //In contrast with an abstract class, an interface doesn't actually define any functionality or behavior.
-    speak(): void   //so we define the types but not the implementations
-}
+// Static keyword is a non-access modifier used for methods and attributes
 
-class Dog implements Animal{ //it's not 'extends', it just implements the properties
-    private name: string; 
-    private color: string;
+//static methods and atributes are associated with the class rather than with each instance of the class.
 
-    constructor(name: string, color: string){
-        this.name = name;
-        this.color = color; 
+class Dog {
+    static instanceCount: number = 0; //now this variable is associated with the class
+    name: string; //this is an instance attribute. That is, each dog has a different name.
+
+    constructor(name: string) {
+        Dog.instanceCount++;
+        this.name = name
     }
-    speak() { //this must be public
-        console.log(`I am ${this.name} and I am ${this.color}`);
-    }
-    test() {
-        return 1;
+
+    static decreaseCount() {    // static method
+        this.instanceCount--;   // it would be the same as Dog.instanceCount--; Here 'this' refers to the class, not the instance.
     }
 }
 
-const dog: Animal = new Dog("Bodoquito","Black");   //if we add the : Animal we now "view this dog through the lens of the animal interface". 
-                                                    //this is helpful when we want to hide the complexity of a specific class and only use the properties of the interface
+const dog1 = new Dog("Bodoquito");  // 1
+console.log(Dog.instanceCount)
 
-class Cat implements Animal {
-    speak(){
-        console.log("Meow")
-    }
-}
+const dog2 = new Dog("Nina");       // 2
+console.log(Dog.instanceCount)
 
-const cat = new Cat()
-const animals: Animal[] = [cat, dog]; //here the interface allows us to use both different objects and treat them as if they were of the same type 
-
-function makeSound(animal: Animal) {
-    animal.speak() //it doesn't matter what the object is, as long as it implements the animal interface
-}
-
-makeSound(dog);
-makeSound(cat);
-
-/* Main questions to ask myself:
-
-    When to use an interface?
-When there's no functionality that you want to define concretely. 
-In this case, Animal is not defining or implementing anything that cat or dog are going to reuse. It simply says that an animal must have the speak().
-
-When to use an abstract class?
-When we want to write behavior that will be reused by one of the concrete classes.
-
-When to use a base class?
-When we only want to worry about the type of behavior that we care about in a specific implementation.
-*/
+Dog.decreaseCount();
+console.log(Dog.instanceCount);
