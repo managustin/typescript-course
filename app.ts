@@ -1,53 +1,56 @@
-//Union and Intersection allow us to combine multiple types together to create some more complex types.
+//  we use type guards to provide something called type narrowing
+// so we can narrow a more general type to a concrete type
 
-// union = pipe operator
-// intersection = end operator
+type StringOrNumber = string | number;
 
-type StringOrNumber = string | number | boolean;     //One or the other
-
-function acceptVal(val: StringOrNumber): void{
-    console.log(val);
+function add1(value: StringOrNumber): StringOrNumber { 
+    if(typeof value === "string"){                          // One way of doing it is with 'typeof'
+        return value + "1"
+    } else{
+        return value + 1
+    }
 }
 
-acceptVal(1);
-acceptVal('string');
-acceptVal(false);
+class Dog {
+    firstName: string;
+    lastName: string;
 
-interface BusinessPartner {
-    name: string;
+    constructor(firstName: string, lastName: string) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }
 
-interface ContactDetails {
-    email: string;
-    phone: string;
+class Cat {
+    firstName: string;
+    constructor(firstName: string) {
+        this.firstName = firstName;
+    }
 }
 
-type BusinessContact = BusinessPartner & ContactDetails;    //this type alias represents an object representing a combination of two other types.
-
-const contact: BusinessContact = {
-    name: "Agustín",
-    email: "contact@email.com",
-    phone: ""
-}
-
-interface Individual {
-    name: string;
-    birthday: Date;
-}
-
-interface Organization {
-    companyName: string;
-    workPhone: string;
-}
-
-type ContactType = Individual | Organization
-
-type CompContact = Individual & Organization
-
-function addContact(contact: ContactType){
-    if("birthday" in contact){      //this checks if birthday is a property of the contact
-        console.log(contact.name, contact.birthday)
+function getName(animal: Cat | Dog) {
+    if(animal instanceof Cat){                          // Other way is with 'instanceof'
+        console.log(`The name is ${animal.firstName}`)
     }else{
-        console.log(contact.companyName, contact.workPhone)
+        console.log(`The name is ${animal.firstName} ${animal.lastName}`)
+    }
+}
+function getNameWithIn(animal: Cat | Dog) {
+    if("lastName" in animal){                          // Other way is with checking if a property is 'in' a specific class 
+        console.log(`The name is ${animal.firstName} ${animal.lastName}`)
+    }else{
+        console.log(`The name is ${animal.firstName}`)
+    }
+}
+
+function isDog(pet: Dog | Cat): pet is Dog {           // This returns wether or not the type is Dog  
+    return (pet as Dog).lastName !== undefined;        // here we cast the pet as Dog and check if it has a lastName
+}
+
+function getNameWithIs(animal: Cat | Dog) {
+    if(isDog(animal)){                          // Other way is with checking if a property is 'in' a specific class 
+        console.log(`The name is ${animal.firstName} ${animal.lastName}`)
+    }else{
+        console.log(`The name is ${animal.firstName}`)
     }
 }
