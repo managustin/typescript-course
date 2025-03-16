@@ -1,19 +1,8 @@
 "use strict";
-// Static keyword is a non-access modifier used for methods and attributes
-//static methods and atributes are associated with the class rather than with each instance of the class.
-class Dog {
-    constructor(name) {
-        Dog.instanceCount++;
-        this.name = name;
-    }
-    static decreaseCount() {
-        this.instanceCount--;
-    }
+//Union and Intersection allow us to combine multiple types together to create some more complex types.
+function acceptVal(val) {
+    console.log(val);
 }
-Dog.instanceCount = 0; //now this variable is associated with the class
-const dog1 = new Dog("Bodoquito"); // 1
-console.log(Dog.instanceCount);
-const dog2 = new Dog("Nina"); // 2
-console.log(Dog.instanceCount);
-Dog.decreaseCount();
-console.log(Dog.instanceCount);
+acceptVal(1);
+acceptVal('string');
+acceptVal(false);
