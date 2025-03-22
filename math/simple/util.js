@@ -1,4 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const helloWorld = "agustín";
-exports.default = helloWorld;
+exports.simple = simple;
+function simple() {
+    return "simple";
+}
