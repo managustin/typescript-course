@@ -1,5 +1,18 @@
-import {simple as complex} from "./math/complex/util";
-import {simple} from "./math/simple/util";
+//Namespaces allow to organize code into different blocks within an individual file
+// not so recommended but it might be found in older codebases
 
-const helloWorld = "agustín"
-export default helloWorld;
+namespace Utils {
+    export class MyClass{
+
+    }
+
+    export function myFunc(){
+
+    }
+
+    export const NAME = "Agustín";
+    
+    export interface NewType {
+        name: string;
+    }
+}
